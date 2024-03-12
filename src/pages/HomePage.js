@@ -77,22 +77,19 @@ const HomePage = () => {
   ];
   const rows = cars.map((car) => ({
     id: car._id,
-    name: car.make + " " + car.model,
-    size: car.size,
-    style: car.style,
-    transmission_type: car.transmission_type,
-    price: car.price,
-    release_date: car.release_date,
+    name: car.Make + " " + car.Model,
+    size: car.VehicleSize,
+    style: car.VehicleStyle,
+    transmission_type: car.TransmissionType,
+    price: car.MSRP,
+    release_date: car.Year,
   }));
 
-  const getData =
-    useCallback(
-      async () => {
+  const getData = useCallback(async () => {
     const res = await apiService.get(`/cars?page=${page}`);
-    setCars(res.data.cars);
-    setTotalPages(res.data.total);
-      }
-      , [page]);
+    setCars(res.cars);
+    setTotalPages(res.total);
+  }, [page]);
 
   useEffect(() => {
     getData();
